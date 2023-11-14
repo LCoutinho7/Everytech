@@ -16,6 +16,7 @@ export default function LoginUser() {
         "info":"login",
         "email":"",
         "senha":""
+
     });
 
     useEffect(() => {
