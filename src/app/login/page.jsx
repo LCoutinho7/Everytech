@@ -22,7 +22,7 @@ export default function LoginUser() {
     useEffect(() =>{
         if(msgstatus == "login realizado com SUCESSO!"){
             setClassLoginMsg("login-suc");
-        }else if(msgstatus == "USUÁRIO E OU SENHA INVÁLIDOS!"){
+        }else if(msgstatus == "USUÁRIO E/OU SENHA INVÁLIDOS!"){
             setClassLoginMsg("login-err");
         }else{
             setClassLoginMsg("login");
@@ -32,10 +32,10 @@ export default function LoginUser() {
     
     //Função de preenchimento do FORM...
     const handleChange = (e)=>{
-        //Destructuring
+        //Destructing
         const{name, value} = e.target;
-        //Prenchendo o campo, utilizando o useState com SPREAD + OnChange:
-        setUsuario({...usuario,[name]:value});
+        //Preenchendo o campo, utilizando o useState com SPREAD + OnChange:
+        setUsuario({...usuario,[name]:value}); 
     }
 
     //Função de validação e ENVIO dos dados.
