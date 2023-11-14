@@ -17,6 +17,28 @@ export default function UserPages() {
         console.log(users);
 
   return (
-    
+    <div>
+        <h1>User Pages</h1>
+        
+        <div>
+            <ul className="card-user">
+                {
+                    users.map((user)=>(
+                        <li key={user.id}>
+                            <figure>
+                                <Image
+                                src={user.avatar_url}
+                                alt="Avatar"
+                                width={50}
+                                height={50} />
+                                <figcaption>{user.login}</figcaption>
+                            </figure>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+
+    </div>
   )
 }
