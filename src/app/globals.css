@@ -11,5 +11,13 @@
 
     .login-err{
         @apply bg-red-500 text-red-700 border border-red-700 text-center text-3xl p-5;
-   
+    }
+
+    .login{
+        @apply hidden;
+    }
+
+    
+        }
+    }
 }
