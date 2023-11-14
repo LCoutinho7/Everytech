@@ -6,10 +6,10 @@ import { useEffect, useState } from "react";
 export default function LoginUser() {
 
     //Utilizando o redirecionamento quando estamos no cliente:
-    const navigate = useRouter();
+    const navigate = useRouter ();
 
-    const [msgstatus, setMsgStatus] = useState("");
-    const [classLoginMsg, setClassLoginMsg] = useState("");
+    const[msgstatus, setMsgStatus] = useState("");
+    const[classLoginMsg, setClassLoginMsg] = useState("");
 
     //Criando um useState para comportar o usuário:
     const [usuario, setUsuario] = useState({
