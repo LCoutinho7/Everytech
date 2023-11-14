@@ -19,15 +19,16 @@ export default function LoginUser() {
 
     });
 
-    useEffect(() => {
-       if(msgstatus == "Login realizado com SUCESSO!"){
-          setClassLoginMsg("login-suc");
+    useEffect(() =>{
+        if(msgstatus == "login realizado com SUCESSO!"){
+            setClassLoginMsg("login-suc");
         }else if(msgstatus == "USUÁRIO E OU SENHA INVÁLIDOS!"){
             setClassLoginMsg("login-err");
         }else{
             setClassLoginMsg("login");
         }
-    }, [msgstatus]);
+
+    }, {msgstatus});
     
     //Função de preenchimento do FORM...
     const handleChange = (e)=>{
