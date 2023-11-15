@@ -9,7 +9,7 @@ export default function Cabecalho() {
       
       <header className="bg-009ff7 text-white shadow-lg text-center">
 
-      <div className="mx-auto max-w-2xl flex items-center justify-center flex-col">
+<div className="mx-auto max-w-2xl flex items-center justify-center flex-col">
         <Image src="/portoLogo.png" alt="Logo da Porto Seguro" width={320} height={50}/>
         <hr className="border-azulPorto border-t-2 w-full mt-1"/>
           <nav className="menu">
