@@ -45,7 +45,7 @@ export default function Cabecalho() {
           </ul>
         </nav>
         </div>
-      <button className="absolute top-0 right-0 mt-2 mr-2 bg-azulPorto-600 text-black px-4 py-2 rounded">
+        <button className="absolute top-0 right-0 mt-2 mr-2 bg-azulPorto-600 text-black px-4 py-2 rounded">
         <Image src="/user.png" alt="Icone de usuário" width={32} height={30}></Image>
         <Link href="/login"></Link>
       </button>
