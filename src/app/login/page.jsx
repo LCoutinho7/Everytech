@@ -27,8 +27,7 @@ export default function LoginUser() {
         }else{
             setClassLoginMsg("login");
         }
-
-    }, {msgstatus});
+    });
     
     //Função de preenchimento do FORM...
     const handleChange = (e)=>{
