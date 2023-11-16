@@ -76,38 +76,35 @@ export default function CadUser({params}) {
       }
     }
 
-  return (
-    <div>
-        <h1>CADASTRO DE USUÁRIOS</h1>
-
-            <h2 className={classLoginMsg}>{msgstatus}</h2>
-
-        <div>
+    return (
+        <div className="flex items-center justify-center h-screen">
+          <div className="w-full max-w-xs">
+            <h1 className="text-2xl font-bold mb-4 text-center">CADASTRO DE USUÁRIOS</h1>
+            <h2 className={`${classLoginMsg} text-center`}>{msgstatus}</h2>
             <form onSubmit={handleSubmit}>
-                <fieldset>
-
-                    <legend>CADASTRO</legend>
-                    <div>
-                        <label htmlFor="idNome">NOME:</label>
-                        <input type="text" name="nome" id="idNome" placeholder="Digite o seu NOME:" value={usuario.nome} onChange={handleChange}/>
-                    </div>
-                    <div>
-                        <label htmlFor="idEmail">EMAIL:</label>
-                        <input type="email" name="email" id="idEmail" placeholder="Digite o seu EMAIL:" value={usuario.email} onChange={handleChange}/>
-                    </div>
-                    <div>
-                        <label htmlFor="idSenha">SENHA:</label>
-                        <input type="password" name="senha" id="idSenha" placeholder="Digite a sua SENHA:" value={usuario.senha} onChange={handleChange}/>
-                    </div>
-                    <div>
-                        <button>CADASTRAR</button>
-                    </div>
-                    <div>
-                        <p>Se você já possui registro. <Link href="/login">CLIQUE AQUI</Link></p>
-                    </div>
-                </fieldset>
+              <fieldset className="mb-4 p-4 border rounded">
+                <legend className="text-lg font-bold mb-2">CADASTRO</legend>
+                <div className="mb-4">
+                  <label htmlFor="idNome" className="block text-sm font-medium">NOME:</label>
+                  <input type="text" name="nome" id="idNome" placeholder="Digite o seu NOME:" value={usuario.nome} onChange={handleChange} className="w-full border p-2 rounded" />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="idEmail" className="block text-sm font-medium">EMAIL:</label>
+                  <input type="email" name="email" id="idEmail" placeholder="Digite o seu EMAIL:" value={usuario.email} onChange={handleChange} className="w-full border p-2 rounded" />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="idSenha" className="block text-sm font-medium">SENHA:</label>
+                  <input type="password" name="senha" id="idSenha" placeholder="Digite a sua SENHA:" value={usuario.senha} onChange={handleChange} className="w-full border p-2 rounded" />
+                </div>
+                <div>
+                  <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">CADASTRAR</button>
+                </div>
+              </fieldset>
             </form>
+            <div className="text-center">
+              <p>Se você já possui registro. <Link href="/login">CLIQUE AQUI</Link></p>
+            </div>
+          </div>
         </div>
-    </div>
-  )
-}
+      );
+    }

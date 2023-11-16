@@ -4,111 +4,92 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function LoginUser() {
-
-    //Utilizando o redirecionamento quando estamos no cliente:
+    // Utilizando o redirecionamento quando estamos no cliente:
     const navigate = useRouter();
-
+  
     const [msgstatus, setMsgStatus] = useState("");
     const [classLoginMsg, setClassLoginMsg] = useState("");
-
-    //Criando um useState para comportar o usuário:
+  
+    // Criando um useState para comportar o usuário:
     const [usuario, setUsuario] = useState({
-        "info":"login",
-        "email":"",
-        "senha":""
-    });
-
-    useEffect(() => {
-       if(msgstatus == "Login realizado com SUCESSO!"){
-          setClassLoginMsg("login-suc");
-        }else if(msgstatus == "USUÁRIO E OU SENHA INVÁLIDOS!"){
-            setClassLoginMsg("login-err");
-        }else{
-            setClassLoginMsg("login");
-        }
-    }, [msgstatus]);
+        "info": "cadastro",
+        "nome": "",
+        "email": "",
+        "senha": "",
+        "cnh": "" // Adicionando o campo CNH
+      });
     
-    //Função de preenchimento do FORM...
-    const handleChange = (e)=>{
-        //Destructuring
-        const{name, value} = e.target;
-        //Prenchendo o campo, utilizando o useState com SPREAD + OnChange:
-        setUsuario({...usuario,[name]:value});
-    }
-
-    //Função de validação e ENVIO dos dados.
-    const handleSubmit = async (e)=>{
-        e.preventDefault();
-
-        try {
-            const response = await fetch("http://127.0.0.1:5000/verificar_usuario",{
-                method: "POST",
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                body:  JSON.stringify(usuario)
-            });
-
-            if(response.ok){
-                const user = await response.json();
-
-                if(user){
-
-                    //Gerando o token do usuário:
-                    const token = Math.random().toString(36).substring(2) + Math.random().toString(36).substring(2);
-
-                    //Armazenar o token no sessionStorage:
-                    sessionStorage.setItem("token-user",token);
-
-                    setMsgStatus("Login realizado com SUCESSO!");
-                    
-                    setTimeout(()=>{
-                        setMsgStatus("");
-                        navigate.push("/");
-                    },5000);
-                }else{
-                    setMsgStatus("USUÁRIO E OU SENHA INVÁLIDOS!");
-                    setTimeout(()=>{
-                        setMsgStatus("");
-                        setUsuario({
-                            "info":"login",
-                            "email":"",
-                            "senha":""
-                        });
-                    },5000);
-                }
-            }
-        } catch (error) {
+      useEffect(() => {
+        // ... Código existente
+      }, [msgstatus]);
+    
+      const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUsuario({ ...usuario, [name]: value });
       }
-    }
-
-  return (
-    <div>
-        <h1>INFORMAÇÕES DOS USUÁRIOS</h1>
-
-            <h2 className={classLoginMsg}>{msgstatus}</h2>
-
-        <div>
+    
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+    
+        try {
+          const response = await fetch("http://127.0.0.1:5000/inserir_usuario", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(usuario)
+          });
+    
+          if (response.ok) {
+            const user = await response.json();
+    
+            if (user) {
+              setMsgStatus("Cadastro realizado com SUCESSO!");
+              setTimeout(() => {
+                setMsgStatus("");
+                router.push("/");
+              }, 5000);
+            } else {
+              setMsgStatus("OCORREU UM ERRO!");
+              setTimeout(() => {
+                setMsgStatus("");
+                setUsuario({
+                  "info": "cadastro",
+                  "email": "",
+                  "senha": "",
+                  "nome": "",
+                  "cnh": "" // Resetando o campo CNH em caso de erro
+                });
+              }, 5000);
+            }
+          }
+        } catch (error) {
+          // Tratamento de erro
+        }
+      }
+    
+      return (
+        <div className="flex items-center justify-center h-screen">
+          <div className="w-full max-w-xs">
+            <h1 className="text-2xl font-bold mb-4 text-center">CADASTRO DE USUÁRIOS</h1>
+            <h2 className={`${classLoginMsg} text-center`}>{msgstatus}</h2>
             <form onSubmit={handleSubmit}>
-                <fieldset>
-                    <legend>LOGIN</legend>
-                    <div>
-                        <label htmlFor="idEmail">EMAIL:</label>
-                        <input type="email" name="email" id="idEmail" placeholder="Digite o seu EMAIL:" value={usuario.email} onChange={handleChange}/>
-                    </div>
-                    <div>
-                        <label htmlFor="idSenha">SENHA:</label>
-                        <input type="password" name="senha" id="idSenha" placeholder="Digite a sua SENHA:" value={usuario.senha} onChange={handleChange}/>
-                    </div>
-                    <div>
-                        <button>LOGIN</button>
-                    </div>
-                    <div>
-                        <p>Se você ainda não possui registro. <Link href="/login/cad">CLIQUE AQUI</Link></p>
-                    </div>
-                </fieldset>
+              <fieldset className="mb-4 p-4 border rounded">
+                <legend className="text-lg font-bold mb-2">CADASTRO</legend>
+                {/* Campos existentes ... */}
+                <div className="mb-4">
+                  <label htmlFor="idCNH" className="block text-sm font-medium">NÚMERO DA CNH:</label>
+                  <input type="text" name="cnh" id="idCNH" placeholder="Digite o número da CNH:" value={usuario.cnh} onChange={handleChange} className="w-full border p-2 rounded" />
+                </div>
+                <div>
+                  <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">CADASTRAR</button>
+                </div>
+              </fieldset>
             </form>
+            <div className="text-center">
+              <p>Se você já possui registro. <Link href="/login">CLIQUE AQUI</Link></p>
+            </div>
+          </div>
         </div>
-    </div>
-  )
-}
+      );
+    }
