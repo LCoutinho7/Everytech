@@ -58,9 +58,11 @@
         }
     }
 
+
     .rodape {
-        @apply flex font-extrabold text-2xl text-white bg-azulPorto p-2 text-center fixed bottom-0 h-40 w-full;
+        @apply flex font-bold text-2xl text-white bg-azulRodape p-2 text-center fixed bottom-0 h-40 w-full;
     }
+  
 
     .lat-prod-all{
 
